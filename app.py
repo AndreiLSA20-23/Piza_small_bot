@@ -8,6 +8,7 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())  # Работа с ключем токеном
 
 from handlers.user_private import user_private_router
+from handlers.user_group import user_group_router
 from common.bot_cmds_list import private
 
 bot = Bot(token=os.getenv('TOKEN'))  # Экземпляр класса бот
@@ -15,6 +16,7 @@ dp = Dispatcher()  # Экземпляр класса отвечающий за �
 ALLOWED_UPDATES = ['message', 'edited_message']
 
 dp.include_router(user_private_router)
+dp.include_router(user_group_router)
 
 
 async def main():
