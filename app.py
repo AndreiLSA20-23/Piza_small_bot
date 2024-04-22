@@ -2,6 +2,7 @@ import os
 import asyncio
 
 from aiogram import Bot, Dispatcher, types
+from aiogram.enums import ParseMode
 from aiogram.types import BotCommandScopeAllPrivateChats
 from dotenv import find_dotenv, load_dotenv
 
@@ -11,7 +12,7 @@ from handlers.user_private import user_private_router
 from handlers.user_group import user_group_router
 from common.bot_cmds_list import private
 
-bot = Bot(token=os.getenv('TOKEN'))  # Экземпляр класса бот
+bot = Bot(token=os.getenv('TOKEN'), parse_mode=ParseMode.HTML)  # Экземпляр класса бот
 dp = Dispatcher()  # Экземпляр класса отвечающий за сообщения от сервера телеграмм.
 ALLOWED_UPDATES = ['message', 'edited_message']
 
