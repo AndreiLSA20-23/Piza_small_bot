@@ -1,5 +1,5 @@
 # Хендлеры администрирования группой
-from string import punctuation
+from string import punctuation, digits
 
 from aiogram import F, Bot, types, Router
 from aiogram.filters import Command
@@ -32,13 +32,15 @@ async def get_admins(message: types.Message, bot: Bot):
 
 
 def clean_text(text: str):
-    return text.translate(str.maketrans("", "", punctuation))
+    pun = digits + punctuation
+    return text.translate(str.maketrans("", "", pun))
 
 
 @user_group_router.edited_message()
 @user_group_router.message()
 async def cleaner(message: types.Message):
-    if restricted_words.intersection(clean_text(message.text.lower()).split()):
+    msn = clean_text(message.text.lower())
+    if restricted_words.intersection(msn.split()):
         await message.answer(
             f"{message.from_user.first_name}, соблюддайте порядок в чате!"
         )
